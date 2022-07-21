@@ -1,20 +1,24 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contactos: []
+			
+			
 		},
 		actions: {
+
+			getContacts: () => {
+				fetch('https://assets.breatheco.de/apis/fake/contact/agenda/Luffy85', {
+					method: "GET",
+					
+					headers: {
+					  "Content-Type": "application/json"
+					}
+				  }).then(res => res.json())
+				  .then(data => {
+					setStore({contactos:data})
+				  })
+				},
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
@@ -38,6 +42,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			}
+			
 		}
 	};
 };
