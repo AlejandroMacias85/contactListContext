@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
+
 const initialValues = {
   full_name: "",
   email: "",
@@ -21,12 +22,10 @@ export const EditUser = () => {
       [name]: value,
     });
   };
-  const addContact = () => {
-    actions.add(values);
-  };
+
   return (
     <div className="container bg-secondary  bg-opacity-10  p-5">
-      <h1>Add new contact </h1>
+      <h1>Edit contact </h1>
       <div className="Container mt-5 p-1 align-items-center">
         <form>
           <div className="mb-3">
@@ -46,14 +45,7 @@ export const EditUser = () => {
               name="email"
               label="email"
             />
-            <h6>agenda_slug</h6>
-            <input
-              className="form-control"
-              value={values.agenda_slug}
-              onChange={handleInputChange}
-              name="agenda_slug"
-              label="agenda_slug"
-            />
+
             <h6>address</h6>
             <input
               className="form-control"
@@ -72,13 +64,22 @@ export const EditUser = () => {
             />
           </div>
           <div className="d-grid gap-2">
-            <button className="btn btn-primary" type="submit" onClick={() => addContact()}> Save </button>
+          <Link to="/">
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={() => {
+                actions.editarContact(values, store.currentID)
+              }}
+            >
+              {" "}
+              Save{" "}
+            </button>
+            </Link>
           </div>
         </form>
       </div>
-      {/* <Link to={"/" + index}>
-                <span>Link to: {item.title}</span>
-              </Link> */}
+      
     </div>
   );
 };

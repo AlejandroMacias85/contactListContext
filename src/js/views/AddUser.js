@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 const initialValues = {
   full_name: "",
   email: "",
-  agenda_slug: "",
+
   address: "",
   phone: "",
 };
@@ -13,7 +13,7 @@ const initialValues = {
 export const AddUser = () => {
   const { actions, store } = useContext(Context);
   const [values, setValues] = useState(initialValues);
-
+console.log(store)
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({
@@ -21,9 +21,7 @@ export const AddUser = () => {
       [name]: value,
     });
   };
-  const addContact = () => {
-    actions.add(values);
-  };
+
   return (
     <div className="container bg-secondary  bg-opacity-10  p-5">
       <h1>Add new contact </h1>
@@ -46,14 +44,7 @@ export const AddUser = () => {
               name="email"
               label="email"
             />
-            <h6>agenda_slug</h6>
-            <input
-              className="form-control"
-              value={values.agenda_slug}
-              onChange={handleInputChange}
-              name="agenda_slug"
-              label="agenda_slug"
-            />
+
             <h6>address</h6>
             <input
               className="form-control"
@@ -71,14 +62,20 @@ export const AddUser = () => {
               label="phone"
             />
           </div>
-          <div className="d-grid gap-2">
-            <button className="btn btn-primary" type="submit" onClick={() => addContact()}> Save </button>
+          <div className="d-grid">
+            <Link to="/">
+              <button
+                className="btn btn-primary"
+                type="submit"
+                onClick={() => actions.createContact(values)}
+              >
+                {" "}
+                Save{" "}
+              </button>
+            </Link>
           </div>
         </form>
       </div>
-      {/* <Link to={"/" + index}>
-                <span>Link to: {item.title}</span>
-              </Link> */}
     </div>
   );
 };
