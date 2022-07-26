@@ -1,20 +1,19 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Modal } from "../component/Modal";
 // import { Modal } from "../component/Modal";
-import PropTypes from 'prop-types'; 
-
+import PropTypes from 'prop-types';
 export const ContactList = (props) => {
   const { store, actions } = useContext(Context);
  console.log(store.contactos)
-
   const [openModal, setOpenModal] = useState(false);
   const Toggle = () => setOpenModal(!openModal);
-
-  function mandarID(theID) {
-    store.currentID = theID;
+ let history = useHistory()
+  function handleDelete(i) {
+    console.log("handleDelete contact", i);
+    actions.borrarContact(i);
   }
   return (
     <div className="container bg-secondary  bg-opacity-10  p-5">
@@ -23,14 +22,13 @@ export const ContactList = (props) => {
           <button className="btn btn-success">Add New contact</button>
         </Link>
       </div>
-      <Modal id={props.id} show={openModal} close={Toggle} />
+      <Modal  show={openModal} close={Toggle} />
       <div>
-        {store.contactos.map((item) => {
+        {store.contactos.map((item, index) => {
           return (
             <div className="list-group">
               <li
-              
-                key={props.id}
+                key={index}
                 href="#"
                 className="list-group-item list-group-item-action d-flex gap-3 py-3"
                 aria-current="true"
@@ -44,17 +42,17 @@ export const ContactList = (props) => {
                 />
                 <div className="d-flex gap-2 w-100 justify-content-between">
                   <div>
-                    <h6 className="mb-0">{props.name}</h6>
-                    <p className="mb-0 opacity-75">{props.address}</p>
-                    <p className="mb-0 opacity-75">{props.phone}</p>
-                    <p className="mb-0 opacity-75">{props.email}</p>
-                    <p className="mb-0 opacity-75">{props.id}</p>
+                    <h6 className="mb-0">{item.name}</h6>
+                    <p className="mb-0 opacity-75">{item.address}</p>
+                    <p className="mb-0 opacity-75">{item.phone}</p>
+                    <p className="mb-0 opacity-75">{item.email}</p>
+                    <p className="mb-0 opacity-75">{item.id}</p>
                   </div>
                   <div className="d-flex gap-2 justify-content-between">
-                    <Link to="/EditUser">
+                    
                       <button
                         className="btn btn-primary"
-                        // onClick={() => actions.borrarContact(props.id)}
+                        onClick={() => history.push(`/AddUser/${item.id}`)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +66,12 @@ export const ContactList = (props) => {
                         </svg>
                         Edit
                       </button>
-                    </Link>
+                  
+                    <div>
+                      <button onClick={() => handleDelete(item.id)}>
+                          Delete
+                      </button>
+                    </div>
                     <div>
                     <button
                       className="btn btn-success"
@@ -90,15 +93,12 @@ export const ContactList = (props) => {
                       </svg>
                     </button>
                     </div>
-                   
-                    
                   </div>
                 </div>
               </li>
             </div>
           );
         })}
-         
       </div>
     </div>
   );

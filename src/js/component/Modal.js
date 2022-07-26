@@ -22,7 +22,7 @@ export const Modal = ({ show, close, props }) => {
                 ></button>
               </div>
               <div className="modal-body">
-                {/* <p>{props.name}</p> */}
+                <p>Modal body</p>
               </div>
               <div className="modal-footer">
                 <button
@@ -34,14 +34,14 @@ export const Modal = ({ show, close, props }) => {
                   Close
                 </button>
                 
-                <button
+                {/* <button
                   type="button"
                   className="btn btn-primary"
                   onClick={() => actions.borrarContact(props.id)}
                 >
 
                   Ohh yes!
-                </button>
+                </button> */}
               </div>
             </div>
           </div>

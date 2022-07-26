@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contactos: [],
-			currentID: 0
+			
 			
 			
 		},
@@ -39,37 +39,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({contactos:[...getStore().contactos,data]})
 					  })
 					},
-					editarContact: (obj, id) => {
-						console.log("id", id)
-						console.log("obj", obj)
-						let contactoModificado = {
-							id: obj.id,
-							full_name: obj.full_name,
-							email: obj.email,
-							agenda_slug:"Luffy85",
-							address: obj.address,
-							phone: obj.phone
-						}
-						store.contactos.map((cadaContacto) => {
-							if(cadaContacto.id === contactoModificado.id) {
-								fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
+					editarContact: (contact) => {
+						console.log("id", contact.id)
+						
+						
+								fetch(`https://assets.breatheco.de/apis/fake/contact/${contact.id}`, {
 							method: "PUT",
-							body:JSON.stringify()
+							body:JSON.stringify(contact)
 							,
 							headers: {
 							  "Content-Type": "application/json"
 							}
-						  }).then(res => res.json())
-						  .then(data => {
-							setStore({contactos:[...getStore().contactos,data]})
+							
+						  }).then((response) => {
+							response.status === 200 ? getActions().getContacts() : "";
 						  })
 								
-							}
-						} )
+						
 						// store.contactos.id
 						
 						},
-						borrarContact: (obj, id) => {
+						borrarContact: (id) => {
 							fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, {
 								method: "DELETE",
 							
