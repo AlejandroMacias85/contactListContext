@@ -42,11 +42,11 @@ export const ContactList = (props) => {
                 />
                 <div className="d-flex gap-2 w-100 justify-content-between">
                   <div>
-                    <h6 className="mb-0">{item.name}</h6>
+                    <h6 className="mb-0">{item.full_name}</h6>
                     <p className="mb-0 opacity-75">{item.address}</p>
                     <p className="mb-0 opacity-75">{item.phone}</p>
                     <p className="mb-0 opacity-75">{item.email}</p>
-                    <p className="mb-0 opacity-75">{item.id}</p>
+                   
                   </div>
                   <div className="d-flex gap-2 justify-content-between">
                     
