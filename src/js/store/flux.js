@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							  
 							  console.log(id)
 							},
-		
+							
 	
 
 			// Use getActions to call a function within a fuction

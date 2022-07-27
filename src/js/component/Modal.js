@@ -34,14 +34,12 @@ export const Modal = ({ show, close, props }) => {
                   Close
                 </button>
                 
-                {/* <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={() => actions.borrarContact(props.id)}
-                >
-
-                  Ohh yes!
-                </button> */}
+                <button
+        className="btn btn-outline-danger m-4"
+        onClick={() => clearTodos()}
+      >
+        Delete Set List
+      </button>
               </div>
             </div>
           </div>

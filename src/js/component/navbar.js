@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-	// const { store, actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	return (
 		<nav className="navbar navbar-light bg-light mb-3">
 			<Link to="/">
